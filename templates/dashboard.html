@@ -1,0 +1,11 @@
+{% extends "dashboard_base.html" %}
+{% block title%} {{ title }} {% endblock %}
+
+{% block content%}
+  <div class="container text-center">
+    <h1 class="display-4 mb-2 text-primary">Welcome {{ current_user.name}} </h1>
+    <h2 class="text-muted"> Clínica </h2>
+    <p class="lead text-muted">We pride ourselves on quality</p>
+    <a class="btn btn-primary m-2 p-2 rounded-pill" href="{{ url_for('index') }}">Back Home</a>
+  </div>
+{% endblock%}

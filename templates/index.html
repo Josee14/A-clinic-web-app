@@ -1,0 +1,597 @@
+{% extends 'base.html'%}
+    {% block hero %}
+        <section id="hero" class="d-flex align-items-center">
+      <div class="container">
+        <h1>Karibu hapa Clínica</h1>
+        <h2>
+          We care for you<br>With our State of the art amenities, equipment
+          and our well trained staff,<br> we are committed to delivering the most
+          effective and compassionate care to all our patients.
+        </h2>
+        {% if current_user.is_authenticated %}
+        
+        <a href="{{url_for('dashboard')}}" class="btn-get-started scrollto">dashboard<i class="bx bx-chevron-right"></i></a>
+        {% else %}
+         <a href="{{url_for('auth.login')}}" class="btn-get-started scrollto">Login<i class="bx bx-chevron-right"></i></a>
+        {% endif %}
+      
+      </div>
+    </section>
+    {% endblock %}
+
+
+    {% block content %}
+      <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="content">
+              <h3>Who we are</h3>
+              <p>
+              Clinica was founded in 2004 to provide online consultations and treatments using a remote doctor/patient interface. The Online Clinic is one of the most established online healthcare providers and is by licensed by the Care Quality Commission.
+                At Clinica, we pride ourselves on the quality, research, and transparency we put into every article.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-receipt"></i>
+                    <h4>Our Credentials</h4>
+                    <p>Clinica Limited is licensed by the Care Quality Commission to provide an online healthcare service.All of our doctors are registered with the General Medical Council.</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-cube-alt"></i>
+                    <h4>The Consultation Process</h4>
+                    <p>Once you have registered you are free to discuss your condition with our doctors online.</p>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Clínica a heart for healthcare</p>
+          </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-eye"></i></div>
+              <h4><a href="">Eye Infection</a></h4>
+              <p> Eye redness, itching, pain, and altered vision (e.g. blurred vision, increased light sensitivity). Your eyes may produce a discharge that can be watery or thick and yellow, and your eyelids may become swollen and flaky.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-circle-fill"></i></div>
+              <h4><a href="https://www.theonlineclinic.co.uk/weight-loss-program.asp">Weight loss</a></h4>
+              <p>Clinica offers a free weight loss consultation with a registered doctor and we may be prepared to prescribe weight loss tablets that can increase your chances of losing weight.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-hospital-user"></i></div>
+              <h4><a href="">Pharmacy services</a></h4>
+              <p>We aim to be the reference center of excellence for specialized pediatric pharmacy practice in Africa by providing good quality medicines with dynamic & information driven pharmacy services</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-tooth"></i></div>
+              <h4><a href="">Dental Clinic</a></h4>
+              <p>At Clínica we strive to give high standards of quality oral health and dental care to children and families in a multidisciplinary team approach.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-battery"></i></div>
+              <h4><a href="">Emergency</a></h4>
+              <p>We have state of the art Equipment for Diagnosis, Life Support and Emergency Services connected across our branches and Shared with Clinical Teams for Better Turnaround Time.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-emoji-smile"></i></div>
+              <h4><a href="">Primary Care</a></h4>
+              <p>We cover a wide range of routine and preventive healthcare services, such as laboratory testing, vaccinations,care for minor symptoms, such as sore throat, cough, or nasal congestion</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <section id="appointment" class="appointment section-bg">
+      <div class="container">
+
+        <div class="section-title" id="appointment">
+          <h2>Make an Appointment</h2>
+          <p>We are committed to Delivering the Most Effective and Most Compassionate Care to all our Patients.</p>
+        </div>
+
+                    <form action=" {{ request.path }} " method="POST" class="php-email-form">
+                       {{ form.csrf_token }} 
+          {% with messages =get_flashed_messages(with_categories=true) %}
+          <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+          {% if messages %} {% for category, message in messages %}
+
+          <div
+            class="alert alert-{{category}} alert-dismissible fade show"
+            role="alert"
+          >
+            {{ message }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          {% endfor %} {% endif %} {% endwith %}
+          <div class="row">
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+            {{ form.phone_no(class="form-control",placeholder="Your Phone") }}
+            </div>
+
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+                {{ form.date(class='form-control datepicker') }}
+    {{ form.hidden_tag() }}
+            </div>
+
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+ {{ form.doctor(class="form-select") }}
+            </div> 
+          </div>
+
+          <div class="form-group mt-3">
+          {{ form.message(class="form-control",placeholder="Message (Optional)",rows="5") }}
+          </div>
+
+
+        {% if current_user.is_authenticated %}
+        <div class="text-center"><button type="submit">Make an Appointment</button></div>
+        {% else %}
+        <div class="text-center"><button type="submit"> <a href="{{url_for('auth.login')}}" class="text-white" >Login to Make an Appointment</a> </button></div>
+        {% endif %}
+
+          
+        </form>
+
+      </div>
+    </section>
+    <section id="departments" class="departments">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Departments</h2>
+          <p></p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Cardiology</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Neurology</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Hepatology</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Pediatrics</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Eye Care</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Cardiology</h3>
+                    <p class="fst-italic">Heart and the blood vessels disorders treatment. </p>
+                    <p>A person with heart disease or cardiovascular disease may be referred to a cardiologist. Cardiology is a branch of internal medicine.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="static/assets/img/departments-1.jpg" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-2">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Neurology</h3>
+                    <p class="fst-italic">Treatment of disorders of the nervous system.</p>
+                    <p> The nervous system is a complex, sophisticated system that regulates and coordinates body activities. It has two major divisions: Central nervous system: the brain and spinal cord.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="static/assets/img/departments-2.jpg" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            
+    </section>
+
+    
+    <section id="doctors" class="doctors">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Doctors</h2>
+          <p>We have highly motivated visionary and results oriented personnels</p>
+        </div>
+<div class="row">
+
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="static/assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Michael Mugo</h4>
+                <span>Chief Medical Officer</span>
+                <p></p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="static/assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Joseph Ndungi</h4>
+                <span>Dentist</span>
+                <p>10years dental specialist</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="static/assets/img/doctors/doctors-3.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Marcelo</h4>
+                <span>Cardiology</span>
+                <p>5 stars rated</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="static/assets/img/doctors/doctors-4.jpg" class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>Maggie Denno</h4>
+                <span>Neurosurgeon</span>
+                <p>UoN graduate.3years experience</p>
+                <div class="social">
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+   <section id="faq" class="faq section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Filter out the noise and nurture your mind with health and wellness advice that’s inclusive and rooted in medical expertise.</p>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Nervous System? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  The nervous system carries messages between your brain and the rest of your body. It directs your movements, thoughts, actions, breathing, digestion, and more.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">COVID 19 Vaccine? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  The arrival of the first COVID-19 vaccines sparked excitement, hope and anticipation for better days ahead. But for the COVID-19 vaccine to put an end to this deadly pandemic, enough of us need to get it. That’s why we strongly encourage you to get the vaccine.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">If I’m pregnant, breastfeeding or trying to conceive, can I get immunized? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  While pregnant and breastfeeding women weren’t included in the first COVID-19 vaccine trials, safety data is reassuring. Since the vaccines don’t contain the live virus, they aren’t thought to increase the risk of infertility, miscarriage during the first or second trimester, stillbirth or birth defects. There’s also no evidence to suggest the vaccine is a risk to a breastfeeding baby. That said, getting the vaccine while trying to conceive, during pregnancy or when you are breastfeeding is a personal choice. We encourage you to talk to your Ob/Gyn to help you make a decision together.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Why Sitting Too Much Is Bad for Your Health<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  It Hurts Your Heart
+Scientists first noticed something was up in a study that compared two similar groups: transit drivers, who sit most of the day, and conductors or guards, who don’t. Though their diets and lifestyles were a lot alike, those that sat were about twice as likely to get heart disease as those that stood.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Sneaky Depression Triggers as You Age <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  If you're feeling lethargic or depressed, too little vitamin B12 may be to blame. If you're older, you're more at risk for the B12 blues because you may not have enough stomach acid to release B12 from food.
+
+Solution: Ask your doctor to measure levels of B12 in your blood. If it's low, talk to your doctor about diet, oral supplements, or an injection to see what might be right for you.  
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section>
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="static/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <h3>Job Mwatu</h3>
+                  <h4>Ceo &amp; Founder</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    "Love all the staff. Upbeat, polite, I have recommended this office to others. I came here on recommendation and was helped day 1."
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="static/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                  <h3>Kamau Ndungi</h3>
+                  <h4>Designer</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    I am most pleased with the treatment and services I have received. From the first time I walked in the door, I have been treated with respect and dignity. I can't say enough about the care and consideration you and your staff have paid me. The entire team is not only thoroughly professional, but also caring and compassionate.
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="static/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                  <h3>Ondiek Elijah</h3>
+                  <h4>Developer</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    "Great place to get adjusted, Dr. Joseph is the best and so is the staff. Everyone is pleasent and have smiles on their faces."
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-wrap">
+                <div class="testimonial-item">
+                  <img src="static/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                  <h3>Joseph Njoroge</h3>
+                  <h4>Farmer</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    "You're all great!!"
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section>
+    <section id="gallery" class="gallery">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>A passion for healing</p>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row no-gutters">
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-1.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-2.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-3.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-4.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-5.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-6.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-7.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="static/assets/img/gallery/gallery-8.jpg" class="galelry-lightbox">
+                <img src="static/assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Liaising with the receptionist to assist patients to fill in their personal details and medical history forms.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>Kanairo, Kenya</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>infoclinica@gmail.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+254 791502604</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="text-center"><button type="submit" href="mailto:josendungi4@gmail.com">Send Mail</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+    {% endblock %}
+ 
