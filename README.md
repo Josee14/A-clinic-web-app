@@ -16,11 +16,9 @@ Depending on your operating system,make a virtual environment to avoid messing w
 
 #### macOS/Linux
 
-  git clone https://github.com/Josee14/A-clinic-web-app
-
-  cd A-clinic-web-app
-
-  python3 -m venv venv
+    git clone https://github.com/Josee14/A-clinic-web-app
+    cd A-clinic-web-app
+    python3 -m venv venv
 
 #### 2 .Activate the environment
 ###### Windows
@@ -44,7 +42,7 @@ Depending on your operating system,make a virtual environment to avoid messing w
 #### 5. Run the application
 ##### For linux and macOS Make the run file executable by running the code
 
-   chmod 777 run
+    chmod 777 run
 
 ##### Then start the application by executing the run file
 
